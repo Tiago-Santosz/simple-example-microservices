@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="pedido-service" />
         <module name="cliente-service" />
+        <module name="produto-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -15,6 +16,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="cliente-service" options="-parameters" />
       <module name="pedido-service" options="-parameters" />
+      <module name="produto-service" options="-parameters" />
     </option>
   </component>
 </project>

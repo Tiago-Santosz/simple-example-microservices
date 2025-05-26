@@ -1,23 +1,22 @@
-package com.exemplo.cliente;
+package org.example.produto;
 
 import jakarta.persistence.*;
 
-
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "produto")
+public class Produto {
     @Id
     private Long id;
 
     private String nome;
-    private String email;
+    private Double preco;
 
-    public Cliente() {}
+    public Produto() {}
 
-    public Cliente(Long id, String nome, String email) {
+    public Produto(Long id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
-        this.email = email;
+        this.preco = preco;
     }
 
     public Long getId() {
@@ -28,8 +27,8 @@ public class Cliente {
         return nome;
     }
 
-    public String getEmail() {
-        return email;
+    public Double getPreco() {
+        return preco;
     }
 
     public void setId(Long id) {
@@ -40,7 +39,7 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 }

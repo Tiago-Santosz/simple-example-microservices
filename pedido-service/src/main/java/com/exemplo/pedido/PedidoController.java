@@ -1,6 +1,7 @@
 package com.exemplo.pedido;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -28,4 +29,12 @@ public class PedidoController {
     public List<Pedido> listar() {
         return repository.findAll();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Pedido> buscarPorId(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(pedido -> ResponseEntity.ok(pedido))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
