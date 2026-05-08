@@ -1,0 +1,69 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: sptech-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: spt1234
+      POSTGRES_DB: sptech-db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - microservices-net
+
+  cliente-service:
+    build:
+      context: ./cliente-service
+    container_name: cliente-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sptech-db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: spt1234
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - microservices-net
+
+  pedido-service:
+    build:
+      context: ./pedido-service
+    container_name: pedido-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sptech-db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: spt1234
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+      - cliente-service
+    networks:
+      - microservices-net
+
+  produto-service:
+    build:
+      context: ./produto-service
+    container_name: produto-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sptech-db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: spt1234
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
