@@ -2,7 +2,7 @@ package com.exemplo.usuario.service;
 
 import com.exemplo.usuario.dto.AuthRequest;
 import com.exemplo.usuario.dto.RegistroRequest;
-import com.exemplo.usuario.model.Usuario;
+import com.exemplo.usuario.entity.Usuario;
 import com.exemplo.usuario.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
